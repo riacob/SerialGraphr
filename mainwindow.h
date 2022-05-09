@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
+#include "serialconfig.h"
+#include "logger.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,7 +22,14 @@ public:
 private slots:
     void on_actionSerial_Configuration_triggered();
 
+    void on_pushButtonConnectSerial_clicked();
+
+    void on_pushButtonDisconnectSerial_clicked();
+
 private:
+    Logger* logger;
+    SerialConfig* serialConfig = NULL;
+    QSerialPort* serialPort;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

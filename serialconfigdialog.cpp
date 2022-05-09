@@ -15,6 +15,12 @@ SerialConfigDialog::SerialConfigDialog(QWidget *parent) :
 
     // Create a new serial configuration
     serialConfig = new SerialConfig();
+
+    // Create a new logger
+    logger = new Logger("SerialConfigDialog");
+
+    // Refresh the connected devices
+    refreshDevices();
 }
 
 SerialConfigDialog::~SerialConfigDialog()
@@ -22,7 +28,7 @@ SerialConfigDialog::~SerialConfigDialog()
     delete ui;
 }
 
-void SerialConfigDialog::on_pushButtonRefreshDevices_clicked()
+void SerialConfigDialog::refreshDevices()
 {
     // Clear the devices listWidget
     ui->listWidgetSerialDevices->clear();
@@ -40,22 +46,26 @@ void SerialConfigDialog::on_pushButtonRefreshDevices_clicked()
     }
 }
 
+void SerialConfigDialog::on_pushButtonRefreshDevices_clicked()
+{
+    refreshDevices();
+}
+
 bool SerialConfigDialog::validateConfig()
 {
     // Return code, true if config is valid, false if it is invalid
     bool retCode = true;
-    Logger logger;
 
     // Port name must not be null
     if (serialConfig->portName == NULL) {
         retCode = false;
-        logger.log("PortName is NULL", Logger::CRITICAL);
+        logger->log("PortName is NULL", Logger::CRITICAL);
     }
 
     // readBufferSize must be >= 0
     if (serialConfig->readBufferSize < 0) {
         retCode = false;
-        logger.log("ReadBufferSize is < 0", Logger::CRITICAL);
+        logger->log("ReadBufferSize is < 0", Logger::CRITICAL);
     }
 
     return retCode;
@@ -77,8 +87,6 @@ void SerialConfigDialog::saveConfig()
         case 6: serialConfig->baudRate = QSerialPort::Baud57600; break;
         case 7: serialConfig->baudRate = QSerialPort::Baud115200; break;
     }
-    // breakEnabled
-    serialConfig->breakEnabled = ui->checkBoxBreakEnabled->checkState();
 
     // dataBits
     switch (ui->comboBoxDataBits->currentIndex()) {
@@ -140,10 +148,6 @@ void SerialConfigDialog::on_pushButtonExitOk_clicked()
     saveConfig();
     // Then we validate the aforementioned config
     if (!validateConfig()) {
-        // Print a message box prompring the user to check their current settings
-        QMessageBox* messageBox = new QMessageBox();
-        messageBox->setText("Configuration invalid, check log for details.");
-        messageBox->exec();
 
         // Clear the serial configuration pointer
         // With this we make sure not to have any invalid configuration
@@ -151,18 +155,28 @@ void SerialConfigDialog::on_pushButtonExitOk_clicked()
 
         // Return reject because config is invalid
         this->reject();
+        logger->log("ExitOk invalid config", Logger::CRITICAL);
+
+        // Print a message box prompring the user to check their current settings
+        QMessageBox* messageBox = new QMessageBox();
+        messageBox->setText("Configuration invalid, check log for details.");
+        messageBox->exec();
+
+        return;
     }
 
     // Return accept because config is valid
     this->accept();
+    logger->log("ExitOk valid config", Logger::INFO);
+    return;
 }
-
-
 
 
 void SerialConfigDialog::on_pushButtonExitCancel_clicked()
 {
     // If the exit cancel button is pressed we return reject
     this->reject();
+    logger->log("ExitCancel normal", Logger::INFO);
+    return;
 }
 

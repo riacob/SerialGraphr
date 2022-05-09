@@ -23,5 +23,10 @@ void Logger::log(const char* logStr, messageType msgType)
     QFile myFile(logFilePath);
     myFile.open(QIODevice::WriteOnly | QFile::Append);
     QTextStream myLog(&myFile);
-    myLog << dateTime << " " << messageTypeStr << " " << logStr << Qt::endl;
+    myLog << dateTime << "[" << parentClassName << "]" << messageTypeStr << " " << logStr << Qt::endl;
+}
+
+Logger::Logger(const char* parentClassName)
+{
+    this->parentClassName = parentClassName;
 }

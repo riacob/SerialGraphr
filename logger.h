@@ -16,13 +16,15 @@ class Logger
 {
 private:
     const char* logFilePath = "log.txt";
+    const char* parentClassName = "[]";
 public:
+    Logger(const char* parentClassName);
     enum messageType {
         INFO,
         WARN,
         CRITICAL
     };
-    void log(const char* logStr, messageType msgType = INFO);
+    void log(const char* logStr, messageType msgType);
 };
 
 #endif // LOGGER_H

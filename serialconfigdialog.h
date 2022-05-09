@@ -14,6 +14,7 @@
 #include <QDialog>
 
 #include "serialconfig.h"
+#include "logger.h"
 
 namespace Ui {
 class SerialConfigDialog;
@@ -31,19 +32,17 @@ public:
 private slots:
     void on_pushButtonRefreshDevices_clicked();
 
-    void on_buttonBox_accepted();
-
-    void on_pushButton_clicked();
-
     void on_pushButtonExitOk_clicked();
 
     void on_pushButtonExitCancel_clicked();
 
 private:
-    SerialConfig* serialConfig;
+    SerialConfig* serialConfig = NULL;
+    Logger* logger;
     Ui::SerialConfigDialog *ui;
     void saveConfig();
     bool validateConfig();
+    void refreshDevices();
 };
 
 #endif // SERIALCONFIGDIALOG_H

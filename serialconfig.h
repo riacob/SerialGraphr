@@ -19,8 +19,6 @@ class SerialConfig
 public:
     // setBaudRate
     QSerialPort::BaudRate baudRate = QSerialPort::Baud9600;
-    // setBreakEnabled
-    bool breakEnabled = true;
     // setDataBits
     QSerialPort::DataBits dataBits = QSerialPort::Data8;
     // setFlowControl
