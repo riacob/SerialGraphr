@@ -7,4 +7,4 @@ SerialGraphr comes bundled with an Arduino Framework based library, [SerialGraph
 Included in the software is the config generator for the aforementioned library.
 <br>
 <br>
-[Made with Qt Open Source](https://www.qt.io/licensing/open-source-lgpl-obligations?hsLang=en)
+[Made with Qt Creator - Open Source License](https://www.qt.io/licensing/open-source-lgpl-obligations?hsLang=en)
