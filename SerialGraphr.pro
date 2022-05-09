@@ -10,10 +10,12 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    serialconfig.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    serialconfig.h
 
 FORMS += \
     mainwindow.ui
