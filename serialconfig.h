@@ -23,8 +23,6 @@ public:
     bool breakEnabled = true;
     // setDataBits
     QSerialPort::DataBits dataBits = QSerialPort::Data8;
-    // setDataTerminalReady
-    bool setDataTerminalReady = false;
     // setFlowControl
     QSerialPort::FlowControl flowControl = QSerialPort::NoFlowControl;
     // setParity
@@ -33,8 +31,6 @@ public:
     QString portName;
     // setReadBufferSize
     qint64 readBufferSize = 0;
-    // setRequestToSend
-    bool requestToSend = false;
     // setStopBits
     QSerialPort::StopBits stopBits = QSerialPort::OneStop;
 };
