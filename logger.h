@@ -24,7 +24,7 @@ public:
         WARN,
         CRITICAL
     };
-    void log(const char* logStr, messageType msgType);
+    void log(const char* logStr, messageType msgType, bool msgBox);
 };
 
 #endif // LOGGER_H

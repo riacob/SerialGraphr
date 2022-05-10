@@ -31,6 +31,10 @@ public:
     qint64 readBufferSize = 0;
     // setStopBits
     QSerialPort::StopBits stopBits = QSerialPort::OneStop;
+    // Default configuration loader
+    void defaultConfig();
+    // Config valitator
+    bool validateConfig();
 };
 
 #endif // SERIALCONFIG_H

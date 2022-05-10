@@ -51,26 +51,6 @@ void SerialConfigDialog::on_pushButtonRefreshDevices_clicked()
     refreshDevices();
 }
 
-bool SerialConfigDialog::validateConfig()
-{
-    // Return code, true if config is valid, false if it is invalid
-    bool retCode = true;
-
-    // Port name must not be null
-    if (serialConfig->portName == NULL) {
-        retCode = false;
-        logger->log("PortName is NULL", Logger::CRITICAL);
-    }
-
-    // readBufferSize must be >= 0
-    if (serialConfig->readBufferSize < 0) {
-        retCode = false;
-        logger->log("ReadBufferSize is < 0", Logger::CRITICAL);
-    }
-
-    return retCode;
-}
-
 void SerialConfigDialog::saveConfig()
 {
     // Save the user defined serial port config
@@ -146,28 +126,21 @@ void SerialConfigDialog::on_pushButtonExitOk_clicked()
     // We return reject if configuration is invalid, accept if it is valid
     // First, we need to save the user-inputted settings into the config class
     saveConfig();
-    // Then we validate the aforementioned config
-    if (!validateConfig()) {
-
+    // Then we validate the aforementioned config, if it is invalid
+    if (!serialConfig->validateConfig()) {
+        // Clear the serial configuration
+        serialConfig->defaultConfig();
         // Clear the serial configuration pointer
-        // With this we make sure not to have any invalid configuration
         serialConfig = NULL;
-
-        // Return reject because config is invalid
+        // Exit from the dialog window
         this->reject();
-        logger->log("ExitOk invalid config", Logger::CRITICAL);
-
-        // Print a message box prompring the user to check their current settings
-        QMessageBox* messageBox = new QMessageBox();
-        messageBox->setText("Configuration invalid, check log for details.");
-        messageBox->exec();
-
+        logger->log("Serial configuration is invalid", Logger::CRITICAL, true);
         return;
     }
 
     // Return accept because config is valid
     this->accept();
-    logger->log("ExitOk valid config", Logger::INFO);
+    logger->log("Serial configuration saved", Logger::INFO, true);
     return;
 }
 
@@ -176,7 +149,7 @@ void SerialConfigDialog::on_pushButtonExitCancel_clicked()
 {
     // If the exit cancel button is pressed we return reject
     this->reject();
-    logger->log("ExitCancel normal", Logger::INFO);
+    logger->log("Serial configuration not saved", Logger::INFO, true);
     return;
 }
 
