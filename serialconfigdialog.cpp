@@ -130,8 +130,6 @@ void SerialConfigDialog::on_pushButtonExitOk_clicked()
     if (!serialConfig->validateConfig()) {
         // Clear the serial configuration
         serialConfig->defaultConfig();
-        // Clear the serial configuration pointer
-        serialConfig = NULL;
         // Exit from the dialog window
         this->reject();
         logger->log("Serial configuration is invalid", Logger::CRITICAL, true);

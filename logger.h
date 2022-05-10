@@ -17,6 +17,7 @@ class Logger
 private:
     const char* logFilePath = "log.txt";
     const char* parentClassName = "[]";
+    bool msgBoxEnabled = false;
 public:
     Logger(const char* parentClassName);
     enum messageType {

@@ -26,7 +26,12 @@ private slots:
 
     void on_pushButtonDisconnectSerial_clicked();
 
+    void on_pushButtonSend_clicked();
+
+    void on_pushButton_clicked();
+
 private:
+    void closeEvent(QCloseEvent *event);
     Logger* logger;
     SerialConfig* serialConfig = NULL;
     QSerialPort* serialPort;

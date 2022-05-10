@@ -14,13 +14,13 @@
    <string>SerialGraphr</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QPlainTextEdit" name="plainTextEditSnd">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>60</y>
+      <y>420</y>
       <width>501</width>
-      <height>281</height>
+      <height>81</height>
      </rect>
     </property>
    </widget>
@@ -50,17 +50,53 @@
      <string>Disconnect</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QPushButton" name="pushButtonSend">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>450</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Send</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelConnectionStatus">
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>30</y>
-      <width>81</width>
+      <y>530</y>
+      <width>731</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Raw serial data</string>
+     <string>Disconnected</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>310</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Read</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEditRec">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>300</y>
+      <width>481</width>
+      <height>70</height>
+     </rect>
     </property>
    </widget>
   </widget>

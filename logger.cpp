@@ -28,7 +28,7 @@ void Logger::log(const char* logStr, messageType msgType, bool msgBox)
     myLog << dateTime << "[" << parentClassName << "]" << messageTypeStr << " " << logStr << Qt::endl;
 
 
-    if (msgBox) {
+    if (msgBox && msgBoxEnabled) {
         QMessageBox messageBox;
 
         messageBox.setText(logStr);

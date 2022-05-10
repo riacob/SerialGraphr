@@ -11,7 +11,7 @@ void SerialConfig::defaultConfig()
     // setParity
     parity = QSerialPort::NoParity;
     // setPortName
-    portName = '\0';
+    portName = "NOTAPORT";
     // setReadBufferSize
     readBufferSize = 0;
     // setStopBits
@@ -23,8 +23,8 @@ bool SerialConfig::validateConfig()
     // Return code, true if config is valid, false if it is invalid
     bool retCode = true;
 
-    // Port name must not be null and at least 4 chars
-    if (portName == NULL && portName.length() < 4) {
+    // Port name regex for windows, mac & linux
+    if (!(portName.startsWith("COM") || portName.startsWith("tty"))) {
         retCode = false;
         //logger->log("PortName is NULL", Logger::CRITICAL, true);
     }
